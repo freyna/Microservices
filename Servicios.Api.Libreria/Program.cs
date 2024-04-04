@@ -1,16 +1,22 @@
+using Servicios.Api.BusinessRules.Autores;
 using Servicios.Api.Datos;
+using Servicios.Api.Datos.ContextMongoDB;
+using Servicios.Api.Datos.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<MongoSettings>(options =>
 {
-    options.ConnectionString = new ConfigurationManager().GetSection("MongoDB").GetSection("ConnectionString").Value;
-    options.Database = new ConfigurationManager().GetSection("MongoDB:DataBase").Value;
-
+    options.ConnectionString = builder.Configuration.GetSection("MongoDB").GetSection("ConnectionString").Value;
+    options.Database = builder.Configuration.GetSection("MongoDB:DataBase").Value;
 });
 
 // Add services to the container.
 builder.Services.AddSingleton<MongoSettings>();
+
+builder.Services.AddTransient<IAutorContext, AutorContext>();
+builder.Services.AddTransient<IAutorRepository, AutorRepository>();
+builder.Services.AddTransient<IAutoresBusinessRules, AutoresBusinessRules>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
