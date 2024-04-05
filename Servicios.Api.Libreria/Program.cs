@@ -17,6 +17,7 @@ builder.Services.AddSingleton<MongoSettings>();
 builder.Services.AddTransient<IAutorContext, AutorContext>();
 builder.Services.AddTransient<IAutorRepository, AutorRepository>();
 builder.Services.AddTransient<IAutoresBusinessRules, AutoresBusinessRules>();
+builder.Services.AddScoped(typeof(IMongoRepository<>),typeof(MongoRepository<>));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

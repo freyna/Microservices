@@ -14,6 +14,14 @@ namespace Servicios.Api.Libreria.Controllers
             _br = br;
         }
 
+        [HttpGet("autoresGeneric")]
+        public async Task<ActionResult<IEnumerable<AutorVM>>> GetAutoresGeneric()
+        {
+            var resp = await _br.AutoresGenerico();
+
+            return Ok(resp);
+        }
+
         [HttpGet("autores")]
         public async Task<ActionResult<IEnumerable<AutorVM>>> GetAutores()
         {
