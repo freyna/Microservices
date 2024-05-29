@@ -68,5 +68,18 @@ namespace Servicios.Api.BusinessRules.Autores
         {
             await _repository.DeleteById(id);
         }
+
+        public async Task<Pagination<AutorEntity>> PaginationBy(Pagination<AutorEntity> pagination)
+        {
+            return await _repository.PaginationBy(
+                filter => filter.Nombre == pagination.Filter,
+                pagination
+            );
+        }
+
+        public async Task<Pagination<AutorEntity>> PaginationByFilter(Pagination<AutorEntity> pagination)
+        {
+            return await _repository.PaginationByFilter(pagination);
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace Servicios.Api.BusinessRules.Autores
         Task InsertAutor(AutorEntity autor);
         Task UpdateAutor(AutorEntity autor);
         Task DeleteAutorById(string id);
+        Task<Pagination<AutorEntity>> PaginationBy(Pagination<AutorEntity> pagination);
+        Task<Pagination<AutorEntity>> PaginationByFilter(Pagination<AutorEntity> pagination);
     }
 }

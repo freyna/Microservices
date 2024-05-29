@@ -51,5 +51,14 @@ namespace Servicios.Api.Libreria.Controllers
             await _autores.DeleteAutorById(id);
             return Ok();
         }
+
+        [HttpPost("pagination")]
+        public async Task<ActionResult<Pagination<AutorEntity>>> PostPagination(Pagination<AutorEntity> pagination)
+        {
+            var resultados = await _autores.PaginationByFilter(pagination);
+
+            return Ok(resultados);
+        }
+
     }
 }

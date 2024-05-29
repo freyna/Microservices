@@ -10,8 +10,7 @@ namespace Servicios.Api.Datos.Repository
         Task InsertDocument(TDocument document);
         Task UpdateDocument(TDocument document);
         Task DeleteById(string id);
-
-        Task<Pagination<TDocument>> PaginationBy(Expression<Func<TDocument, bool>> filterExpression,
-            Pagination<TDocument> pagination);
+        Task<Pagination<TDocument>> PaginationBy(Expression<Func<TDocument, bool>> filterExpression, Pagination<TDocument> pagination);
+        Task<Pagination<TDocument>> PaginationByFilter(Pagination<TDocument> pagination);
     }
 }
