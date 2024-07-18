@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Servicios.Api.Seguridad.Core.Application;
 using Servicios.Api.Seguridad.Core.Entities;
 using Servicios.Api.Seguridad.Core.Persistence;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,10 @@ builder.Services.AddDbContext<SeguridadContexto>(opt =>
 builder.Services.AddIdentityCore<Usuario>()
     .AddEntityFrameworkStores<SeguridadContexto>()
     .AddApiEndpoints();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddAutoMapper(typeof(RegisterHandler));
 
 var app = builder.Build();
 

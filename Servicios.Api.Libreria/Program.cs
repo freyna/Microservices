@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Servicios.Api.BusinessRules.Autores;
 using Servicios.Api.Datos;
 using Servicios.Api.Datos.ContextMongoDB;
 using Servicios.Api.Datos.Repository;
+using Servicios.Api.Seguridad.Core.Entities;
+using Servicios.Api.Seguridad.Core.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

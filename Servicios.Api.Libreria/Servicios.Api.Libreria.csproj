@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Servicios.Api.BusinessRules\Servicios.Api.BusinessRules.csproj" />
+    <ProjectReference Include="..\Servicios.Api.Seguridad\Servicios.Api.Seguridad.csproj" />
   </ItemGroup>
 
 </Project>
