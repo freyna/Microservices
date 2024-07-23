@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Servicios.Api.Seguridad.Core.Application;
 using Servicios.Api.Seguridad.Core.Entities;
 using Servicios.Api.Seguridad.Core.Persistence;
 using System.Reflection;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +29,9 @@ builder.Services.AddIdentityCore<Usuario>()
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddAutoMapper(typeof(RegisterHandler));
+
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
+builder.Services.AddScoped<IValidator<RegisterCommand>, RegisterValidation>();
 
 var app = builder.Build();
 

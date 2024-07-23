@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Api.Seguridad.Core.Application;
@@ -11,16 +12,25 @@ namespace Servicios.Api.Seguridad.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IValidator<RegisterCommand> _validator;
 
-        public UsuarioController(IMediator mediator)
+        public UsuarioController(IMediator mediator, IValidator<RegisterCommand> validator)
         {
             _mediator = mediator;
+            _validator = validator;
         }
 
         [HttpPost("registrar")]
         public async Task<ActionResult<UsuarioDTO>> Registrar(RegisterCommand command)
         {
-            return await _mediator.Send(command);
+            var validationResult = await _validator.ValidateAsync(command);
+
+            if (validationResult.IsValid)
+            {
+                return await _mediator.Send(command);
+            }
+
+            return BadRequest(validationResult.Errors);
         }
 
     }
