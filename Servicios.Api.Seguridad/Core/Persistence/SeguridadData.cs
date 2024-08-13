@@ -21,7 +21,7 @@ namespace Servicios.Api.Seguridad.Core.Persistence
                     Email = "ing.Filiberto.Reyna@gmail.com"
                 };
 
-                await usuarioManager.CreateAsync(usuario,"Password123$");
+                await usuarioManager.CreateAsync(usuario,"Password123456$");
             }
         }
     }
