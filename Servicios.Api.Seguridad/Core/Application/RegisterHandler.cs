@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Servicios.Api.Seguridad.Core.DTO;
 using Servicios.Api.Seguridad.Core.Entities;
 using Servicios.Api.Seguridad.Core.Persistence;
+using Servicios.Api.Seguridad.Jwt;
 
 namespace Servicios.Api.Seguridad.Core.Application
 {
@@ -13,12 +14,14 @@ namespace Servicios.Api.Seguridad.Core.Application
         private readonly SeguridadContexto _context;
         private readonly UserManager<Usuario> _userManager;
         private readonly IMapper _mapper;
+        private readonly IJwtGenerator _jwtGenerator;
 
-        public RegisterHandler(SeguridadContexto context, UserManager<Usuario> userManager, IMapper mapper)
+        public RegisterHandler(SeguridadContexto context, UserManager<Usuario> userManager, IMapper mapper, IJwtGenerator jwtGenerator)
         {
             _context = context;
             _userManager = userManager;
             _mapper = mapper;
+            _jwtGenerator = jwtGenerator;
         }
         public async Task<UsuarioDTO> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -49,7 +52,9 @@ namespace Servicios.Api.Seguridad.Core.Application
 
             if (result.Succeeded)
             {
-                return _mapper.Map<Usuario, UsuarioDTO>(usuario);
+                var usuarioDTO = _mapper.Map<Usuario, UsuarioDTO>(usuario);
+                usuarioDTO.Token = await _jwtGenerator.GenerateToken(usuario);
+                return usuarioDTO;
             }
 
             throw new Exception("No se pudo registrar el usuario");

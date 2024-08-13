@@ -5,6 +5,7 @@ using Servicios.Api.Seguridad.Core.Entities;
 using Servicios.Api.Seguridad.Core.Persistence;
 using System.Reflection;
 using FluentValidation;
+using Servicios.Api.Seguridad.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,8 @@ builder.Services.AddAutoMapper(typeof(RegisterHandler));
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 builder.Services.AddScoped<IValidator<RegisterCommand>, RegisterValidation>();
+
+builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 
 var app = builder.Build();
 
