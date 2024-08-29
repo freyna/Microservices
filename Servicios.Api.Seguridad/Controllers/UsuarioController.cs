@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Api.Seguridad.Core.Application;
@@ -46,6 +47,12 @@ namespace Servicios.Api.Seguridad.Controllers
             }
 
             return BadRequest(validationResult.Errors);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UsuarioDTO>> Get()
+        {
+            return await _mediator.Send(new UsuarioActualCommand());
         }
 
     }

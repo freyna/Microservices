@@ -4,8 +4,12 @@ using Servicios.Api.Seguridad.Core.Application;
 using Servicios.Api.Seguridad.Core.Entities;
 using Servicios.Api.Seguridad.Core.Persistence;
 using System.Reflection;
+using System.Text;
 using FluentValidation;
+using Microsoft.IdentityModel.Tokens;
 using Servicios.Api.Seguridad.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -35,6 +42,21 @@ builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 builder.Services.AddScoped<IValidator<RegisterCommand>, RegisterValidation>();
 
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
+
+builder.Services.AddScoped<IUsuarioSesion, UsuarioSesion>();
+
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
+{
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = key,
+        ValidateAudience = false,
+        ValidateIssuer = false
+    };
+});
+
 
 var app = builder.Build();
 
@@ -63,8 +85,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 app.MapIdentityApi<Usuario>();
 app.Run();
