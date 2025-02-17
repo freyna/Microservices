@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicios.Api.Datos", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicios.Api.BusinessRules", "Servicios.Api.BusinessRules\Servicios.Api.BusinessRules.csproj", "{5D2BB9FB-5081-4200-B60E-77258256DADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicios.Api.Seguridad", "Servicios.Api.Seguridad\Servicios.Api.Seguridad.csproj", "{4795C05D-6E2D-4068-972D-E5FE5A44F041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicios.Api.Seguridad", "Servicios.Api.Seguridad\Servicios.Api.Seguridad.csproj", "{4795C05D-6E2D-4068-972D-E5FE5A44F041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicios.Api.Gateway", "Servicios.Api.Gateway\Servicios.Api.Gateway.csproj", "{BCF4AF69-0B84-48CD-BF9F-7632E4F40E40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4795C05D-6E2D-4068-972D-E5FE5A44F041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4795C05D-6E2D-4068-972D-E5FE5A44F041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4795C05D-6E2D-4068-972D-E5FE5A44F041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF4AF69-0B84-48CD-BF9F-7632E4F40E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF4AF69-0B84-48CD-BF9F-7632E4F40E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF4AF69-0B84-48CD-BF9F-7632E4F40E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF4AF69-0B84-48CD-BF9F-7632E4F40E40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,107 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8561"
+  },
+  "Routes": [
+    //{
+    //  "DownstreamPathTemplate": "/api/LibreriaServicio/autoresGeneric",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 8562
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/autorList",
+    //  "UpstreamHttpMethod": [ "POST", "GET", "UPDATE", "DELETE" ],
+    //  "AuthenticationOptions": {
+    //    "AuthenticationProviderKey": "Bearer",
+    //    "AllowedScopes": []
+    //  }
+    //}
+    {
+      "DownstreamPathTemplate": "/api/autores",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8562
+        }
+      ],
+      "UpstreamPathTemplate": "/autores",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/autores/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8562
+        }
+      ],
+      "UpstreamPathTemplate": "/autores/{id}",
+      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/autores/pagination",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8562
+        }
+      ],
+      "UpstreamPathTemplate": "/autores/pagination",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/usuario",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8563
+        }
+      ],
+      "UpstreamPathTemplate": "/usuario",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/usuario/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8563
+        }
+      ],
+      "UpstreamPathTemplate": "/usuario/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/usuario/registrar",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8563
+        }
+      ],
+      "UpstreamPathTemplate": "/usuario/registrar",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}
